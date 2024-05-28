@@ -26,10 +26,14 @@ def index(request):
         context,
     )
 
-def contact(request, contact_id):
-    # single_contact = 
+def contact(request, contact_id):    
     single_contact = get_object_or_404(Contact.objects.filter(pk=contact_id, show=True))    
     contact_name = f'{single_contact.first_name} {single_contact.last_name}'
+    print('Contact', single_contact)
+    try:
+        print('Imagem:', single_contact.picture)  # Tente acessar o campo picture
+    except Exception as e:
+        print('Erro ao acessar a imagem:', e)
     
     context = {
         'contact': single_contact,

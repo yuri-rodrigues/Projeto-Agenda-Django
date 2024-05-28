@@ -7,7 +7,7 @@
     <h2>Contact</h2>
 
     <form 
-      action="{% url "contact:create" %}"
+      action="{{ form_action }}"
       method="POST"
       enctype="multipart/form-data"
     >
@@ -19,8 +19,13 @@
         <div class="form-group">
           <label for="{{ field.id_for_label }}">{{ field.label }}</label>
           {{ field }}
-          {{ field.errors }}
+          {{ field.errors }}           
         </div> 
+
+        {% if field.name == 'pictute' and field.value.url %}
+            <div class="form-group"><p><img src="{{ field.value.url }}" alt=" "></p></div>
+            
+          {% endif %} 
     {% endfor %}
 
       <div class="form-content">
