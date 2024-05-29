@@ -50,13 +50,14 @@ def login_view(request):
 @login_required(login_url='contact:login')
 def logout_view(request):
     auth.logout(request)
+    messages.success(request, 'Deslogado com sucesso!') 
     return redirect('contact:login')
 
 @login_required(login_url='contact:login')
 def user_update(request):
     form = RegisterUpdateForm(instance=request.user)
 
-    if request.method != 'POST':
+    if request.method != 'POST':        
         return render(
             request,
             'contact/user_update.html',
@@ -75,6 +76,6 @@ def user_update(request):
                 'form': form
             }
         )
-
+    messages.success(request, 'Usuario atualizado com sucesso!') 
     form.save()
     return redirect('contact:login')
